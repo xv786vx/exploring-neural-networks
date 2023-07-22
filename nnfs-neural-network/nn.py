@@ -32,11 +32,6 @@ class Activation_Softmax:
         self.output = probabilities
 
 
-
-
-
-
-
     def backward(self, dvalues):
         selfdinputs = np.empty_like(dvalues)
         for index, (single_output, single_dvalues) in enumerate(zip(self.output, dvalues)):
