@@ -1,0 +1,3 @@
+[] Write code for hidden layer (make it accept batches)
+[] finish forward propagation for the nn from scratch 
+[] research mini-batch gradient descent and implement it in the code
