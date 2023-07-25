@@ -1,9 +1,9 @@
-import tensorflow as tf
-
+#import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import polars as pl
 import os.path
+from nnfunctions import *
 
 '''
 digit_mnist = tf.keras.datasets.mnist
@@ -39,10 +39,23 @@ plt.show()
 
 data = pl.read_csv(os.path.join(os.getcwd(), "from-scratch/mnist-ds/mnist_train.csv"))
 m, n = data.shape
-#print(m, n)
-
 data = np.array(data)
 np.random.shuffle(data)
 
-print(data.T)
+num_values = data.T[0] #all of the numbers
+num_pixels = data.T[1:n] #pixel values of every number 
+num_pixels = num_pixels / 255.0 #making all pixel values between 0-1
+
+bs_i = 0 #batch start index
+be_i = 20 #batch end index
+
+batch = num_pixels.T[bs_i:be_i]
+
+dense1 = Layer_Dense(784, 20)
+dense1.forward(batch)
+reLU1 = reLU()
+reLU1.forward(dense1.output)
+print(reLU1.output)
+
+
 
