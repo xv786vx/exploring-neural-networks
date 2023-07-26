@@ -47,15 +47,41 @@ num_pixels = data.T[1:n] #pixel values of every number
 num_pixels = num_pixels / 255.0 #making all pixel values between 0-1
 
 bs_i = 0 #batch start index
-be_i = 20 #batch end index
+be_i = 3 #batch end index, change to 20 later
 
-batch = num_pixels.T[bs_i:be_i]
+batch = num_pixels.T[bs_i:be_i] #transposes the transposed array so its in normal state
+
+print(batch)
 
 dense1 = Layer_Dense(784, 20)
+output_layer = Layer_Dense(20, 10)
+
 dense1.forward(batch)
+
+'''
 reLU1 = reLU()
 reLU1.forward(dense1.output)
-print(reLU1.output)
+
+output_layer.forward(reLU1.output)
+
+softmax = softmax()
+softmax.forward(output_layer.output)
+print(softmax.output)
+
+
+loss_function = Loss_Categorical_CrossEntropy()
+num_values = num_values[bs_i:be_i]
+loss = loss_function.calculate(softmax.output, num_values[bs_i:be_i])
+
+print("Loss: ", loss)
+
+predictions = np.argmax(softmax.output, axis=1)
+if len(num_values.shape) ==2:
+    num_values = np.argmax(num_values, axis=1)
+accuracy = np.mean(predictions==num_values)
+
+print('Acc: ', accuracy)
+'''
 
 
 
